@@ -8,12 +8,33 @@
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads)
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) or [GitHub Gist](https://gist.github.com/isaacs/579814)
-## Installation
+
+## Clone, rename and define a remote
 ```
-$ git clone --recursive https://github.com/weareopensource/MEANie.git
-$ cd MEANie
+$ git clone https://github.com/weareopensource/MEANie.git
+$ mv MEANie myproject
+$ cd myproject
+$ git remote add -u origin https://github.com/me/myproject.git
+# keep track of the upstream
+$ git remote add Angular https://github.com/weareopensource/Angular.git
+$ git remote add Riess.js https://github.com/weareopensource/Riess.js.git
+$ git add .
+$ git commit -m 'first commit'
+$ git push
 $ npm i
 ```
+
+## Sync
+```
+$ git pull -s subtree Angular master
+$ git pull -s subtree Riess.js master
+```
+
+## Install
+```
+$ cd MEANie
+```
+
 ## Running Your Application
    ### Development
    * Run `npm start` for dev. Navigate to `http://localhost:4200/`.
