@@ -19,7 +19,7 @@ This step is not mandatory. You can directly clone the repository and get a work
 ## Clone the repo localy
 $ git clone https://github.com/weareopensource/MEANie.git
 
-## Rename the folder
+## Rename the folder to match you project name
 $ mv MEANie myproject
 
 ## cd into it
@@ -43,6 +43,7 @@ $ npm i
 ```
 
 ## Sync with the source
+Since MEANie is split into two separate projects (Angular and Riess) hosted on two different reposotories, to get the last updates for one or the other part, simply run the commands bellow
 ```
 $ git pull -s subtree Angular master
 $ git pull -s subtree Riess.js master
