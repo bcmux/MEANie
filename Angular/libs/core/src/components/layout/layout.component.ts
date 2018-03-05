@@ -1,4 +1,10 @@
-import { Component, HostListener, HostBinding, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  HostBinding,
+  ViewChild,
+  ElementRef,
+  AnimationTransitionEvent } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { Router } from '@angular/router';
@@ -11,18 +17,25 @@ import { values, difference, isEmpty } from 'lodash';
 import { fromCore, CoreState, getShowSidenav, getMenuItems } from '@labdat/core-state';
 import { getLoggedIn, getUser } from '@labdat/authentication-state';
 import { map } from 'rxjs/operators/map';
+import { routesAnimation } from '@labdat/animations';
+import { selectTaskLoading } from '@labdat/task-state';
 
 @Component({
   selector: 'layout-root',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
+  animations: [ routesAnimation ]
 })
 export class LayoutComponent {
+
+  @ViewChild('outlet')
+  public outlet
+
   public menuItems$;
   public isSidenavOpened$ = this.store.select(getShowSidenav);
   public isLoggedIn$ = this.store.select(getLoggedIn);
 
-  constructor(private store: Store<CoreState>, private router: Router) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
     const items$ = this.store.select(getMenuItems);

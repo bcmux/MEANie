@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoreGuardService } from './services/core.guard.service';
 import { AuthenticationGuardService } from '@labdat/authentication';
 import { AuthenticationComponent } from '@labdat/authentication';
+import { TaskGuardService } from '@labdat/task-routing';
 
 const coreRoutes: Routes = [
   {
@@ -20,19 +21,25 @@ const coreRoutes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        data: {
+          page: 'home'
+        }
       },
       {
         path: 'auth',
         component: AuthenticationComponent,
-        canActivate: [AuthenticationGuardService]
+        canActivate: [ AuthenticationGuardService ],
+        data: {
+          page: 'authentication'
+        }
       },
-//      {
-//        path: 'slides',
-//        canActivate: [AuthenticationGuardService],
-//        canLoad: [AuthenticationGuardService],
-//        loadChildren: '../../slides/src/slides.module#SlidesModule'
-//      },
+      {
+        path: 'tasks',
+        canActivate: [ AuthenticationGuardService, TaskGuardService ],
+        canLoad: [ AuthenticationGuardService ],
+        loadChildren: '../../task/src/task.module#RootTaskModule'
+      },
       {
         path: '**',
         component: NotFoundComponent,
