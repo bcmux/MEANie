@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/weareopensource/meanjs-2.svg?branch=master)](https://travis-ci.org/weareopensource/meanjs-2)
 
 ## Presentation 
-[Angular Startkicker](https://github.com/weareopensource/Angular) / [Riess.js](https://github.com/weareopensource/Riess.js) combo. This project, on active developpement, aims to be the next MEAN.
+[Angular Kick Starter](https://github.com/weareopensource/Angular) / [Riess.js](https://github.com/weareopensource/Riess.js) combination. This project, on active developpement, aims to be the next MEAN.
 ![demo-stack](https://user-images.githubusercontent.com/3341461/27798612-359c59b0-6012-11e7-9efd-b999e2119515.gif)
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
@@ -21,7 +21,6 @@ $ git remote add Riess.js https://github.com/weareopensource/Riess.js.git
 $ git add .
 $ git commit -m 'first commit'
 $ git push
-$ npm i
 ```
 
 ## Sync
@@ -32,7 +31,8 @@ $ git pull -s subtree Riess.js master
 
 ## Install
 ```
-$ cd MEANie
+$ cd myproject
+$ npm i
 ```
 
 ## Running Your Application
