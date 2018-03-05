@@ -5,7 +5,7 @@
 		"prod": "run-p front:prod back:prod",
 		"front": "cd Angular && npm run-script start",
 		"front:prod": "cd Angular && npm run-script prod",
-		"back": "cd Riess.js/server && npm run-script start",		
+		"back": "cd Riess.js/server && npm run-script start",
 		"back:prod": "cd Riess.js/server && npm run-script prod"
 	},
 	"devDependencies": {
