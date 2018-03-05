@@ -3,7 +3,7 @@
 
 ## Presentation 
 [Angular Kick Starter](https://github.com/weareopensource/Angular) / [Riess.js](https://github.com/weareopensource/Riess.js) combination. This project, on active developpement, aims to be the next MEAN.
-![demo-stack](https://raw.githubusercontent.com/weareopensource/MEANie/18b725b29c994e1e4bd601560b39bd8c4ba5c2dc/screenshot.png)
+![demo-stack](https://raw.githubusercontent.com/weareopensource/Angular/18b725b29c994e1e4bd601560b39bd8c4ba5c2dc/screenshot.png)
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads)
