@@ -19,9 +19,10 @@ import {
   MatIconModule,
   MatCardModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
+//  MatProgressBarModule
 } from '@angular/material';
-import { SharedModule } from '@labdat/shared';
+import { SidenavModule } from '@labdat/sidenav';
 
 export const COMPONENTS = [LayoutComponent, HomeComponent, NotFoundComponent];
 
@@ -36,11 +37,19 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatCardModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
+//  MatProgressBarModule
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, SharedModule, AuthenticationModule, ...MATERIAL_MODULES, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SidenavModule,
+    AuthenticationModule,
+    ...MATERIAL_MODULES,
+    FlexLayoutModule
+  ],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
