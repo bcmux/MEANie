@@ -3,8 +3,7 @@
 ## Angular 5 / material / ngRx Starter 
 ## Presentation 
 This is a project started with angular 5+ , [angular material](https://github.com/angular/material2), [angular-cli](https://github.com/angular/angular-cli) / [Nx](https://github.com/nrwl/nx) and [ngRx](https://github.com/ngrx) to tie it all together.
-
-![demo-stack](https://user-images.githubusercontent.com/3341461/27798612-359c59b0-6012-11e7-9efd-b999e2119515.gif)
+![demo-stack](https://raw.githubusercontent.com/weareopensource/Angular/assets/screenshot.png)
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads)
