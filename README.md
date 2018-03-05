@@ -21,6 +21,12 @@ $ git clone https://github.com/weareopensource/MEANie.git
 $ npm i
 ```
 
+## Running Your Application
+   ### Development
+   * Run `npm start` for dev. Navigate to `http://localhost:4200/`.
+   ### Production
+   * Run `npm run start:prod` to build your client app and start a web server on `http://localhost:4200/`
+
 ## Define your own project repo and keep it sync with MEANie
 This step is not mandatory. You can directly clone the repository and get a working app. But since you will need to deploy your app soon, hosting your own project on github and configuring it to get the last update from the kick starter is a must. This is done this way:
 ```
@@ -56,11 +62,6 @@ $ git pull -s subtree Angular master
 $ git pull -s subtree Riess.js master
 ```
 
-## Running Your Application
-   ### Development
-   * Run `npm start` for dev. Navigate to `http://localhost:4200/`.
-   ### Production
-   * Run `npm run start:prod` to build your client app and start a web server on `http://localhost:4200/`
 ## How to contribute
 We welcome pull requests from the community!
   * Fork the MEANie repository
