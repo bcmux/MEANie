@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/weareopensource/meanjs-2.svg?branch=master)](https://travis-ci.org/weareopensource/meanjs-2)
 
 ## Presentation 
-[Angular Kick Starter](https://github.com/weareopensource/Angular) / [Riess.js](https://github.com/weareopensource/Riess.js) combination. This project, on active developpement, aims to be the next MEAN.
+[Angular Kick Starter](https://github.com/weareopensource/Angular) / [Riess.js](https://github.com/weareopensource/Riess.js) association. This project, on active developpement, aims to be the next MEAN.
 <br><br><br>
 ![demo-stack](https://raw.githubusercontent.com/weareopensource/Angular/assets/screenshot.png)
 
