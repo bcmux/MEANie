@@ -11,6 +11,16 @@ Make sure you have installed all of the following prerequisites on your developm
 * Git - [Download & Install Git](https://git-scm.com/downloads)
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) or [GitHub Gist](https://gist.github.com/isaacs/579814)
 
+## Simple install
+Straightforward
+```
+## Clone the repo localy
+$ git clone https://github.com/weareopensource/MEANie.git
+
+## Install dependencies
+$ npm i
+```
+
 ## Define your own project repo and keep it sync with MEANie
 This step is not mandatory. You can directly clone the repository and get a working app. But since you will need to deploy your app soon, hosting your own project on github and configuring it to get the last update from the kick starter is a must. This is done this way:
 ```
@@ -34,11 +44,8 @@ $ git remote add Riess.js https://github.com/weareopensource/Riess.js.git
 $ git add .
 $ git commit -m 'first commit'
 $ git push
-```
 
-## Install
-```
-$ cd myproject
+## Install dependencies
 $ npm i
 ```
 
