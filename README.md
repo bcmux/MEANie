@@ -13,7 +13,7 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ## Simple install
 Straightforward
-```
+```bash
 ## Clone the repo localy
 $ git clone https://github.com/weareopensource/MEANie.git
 
@@ -29,7 +29,7 @@ $ npm i
 
 ## Define your own project repo and keep it sync with MEANie
 This step is not mandatory. You can directly clone the repository and get a working app. But since you will need to deploy your app soon, hosting your own project on github and configuring it to get the last update from the kick starter is a must. This is done this way:
-```
+```bash
 ## Create a repository from github.com, let say https://github.com/me/myproject.git
 
 ## Clone the repo localy
@@ -57,15 +57,14 @@ $ npm i
 
 ## Sync with the source
 Since MEANie is split into two separate projects (Angular and Riess) hosted on two different reposotories, to get the last updates for one or the other part, simply run the commands bellow
-```
+```bash
 $ git pull -s subtree Angular master
 $ git pull -s subtree Riess.js master
 ```
 
 ## How to contribute
 We welcome pull requests from the community!
-  * Fork the MEANie repository
-  * Make a pull request
+See [Angular READ.me](https://github.com/weareopensource/Angular) and [Riess.js READ.me](https://github.com/weareopensource/Riess.js).
 
 ## License
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE.md)
