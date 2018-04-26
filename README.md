@@ -9,7 +9,7 @@
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads)
-* Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) or [GitHub Gist](https://gist.github.com/isaacs/579814)
+* Node.js (7.x 8.x) - [Download & Install Node.js](https://nodejs.org/en/download/) or [GitHub Gist](https://gist.github.com/isaacs/579814)
 
 ## Simple install
 Straightforward
