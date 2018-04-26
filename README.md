@@ -28,8 +28,8 @@ $ npm i
    * Run `npm run start:prod` to build your client app and start a web server on `http://localhost:4200/`
 
    This process takes into account all system environment variables defined under the form FRONT_PATH_TO_VARIABLE or BACK_PATH_TO_VARIABLE. You can for instance define the API server coordonates by defining those system environment variables:
-   -  FRONT_API_ENDPOINTS_HOST='my-server'
-   -  FRONT_API_ENDPOINTS_PORT=4000
+   -  FRONT_API_HOST='my-server'
+   -  FRONT_API_PORT=4000
    -  FRONT_API_ENDPOINTS_BASEPATH='api2'
 
 
