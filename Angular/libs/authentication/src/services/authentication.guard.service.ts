@@ -1,67 +1,58 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-  CanLoad,
-  Route
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/take';
-import {
-  AuthenticationState,
-  getLoggedIn,
-  getTokenExpiresIn,
-  fromAuthentication
-} from '@labdat/authentication-state';
-import { fromRouter } from '@labdat/router-state';
+import { AuthenticationState } from '../+state/states/authentication-state.state';
+import * as fromAuthentication from '../+state/actions/authentication-state.actions';
+import { getLoggedIn } from '../+state/selectors/authentication-state.selectors';
+import { fromRouter } from '@labdat/common/router-state';
+import { map } from 'rxjs/operators/map';
 
 @Injectable()
-export class AuthenticationGuardService implements CanActivate, CanLoad {
+export class AuthenticationGuardService implements CanActivate {
   constructor(private store: Store<AuthenticationState>) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    const currentUrl = route.url[0].path;
-    return this.hasPermission(currentUrl);
-  }
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean | Promise<boolean> {
 
-  canLoad(route: Route): Observable<boolean>|Promise<boolean>|boolean {
-    const currentUrl = route.path;
-    return this.hasPermission(currentUrl);
-  }
+    const path = state.url.split('/')[1];
 
-  hasPermission(path: string) {
-    return Observable.combineLatest(
-      this.store.select(getLoggedIn),
-      this.store.select(getTokenExpiresIn),
-      (loggedIn, tokenExpiresIn) => {
+    return this.store.select(getLoggedIn)
+    .pipe(
+      map(loggedIn => {
+        const tokenExpiresIn = Number(localStorage.getItem('tokenExpiresIn'));
         if (loggedIn) {
           if (path === 'auth') {
-            this.store.dispatch(new fromRouter.Go({ path: ['/', 'home'] }));
-          }
-          return true;
-        } else {
-          if (tokenExpiresIn) {
-            if (tokenExpiresIn < Date.now()) {
-              if (path === 'auth') {
-                this.store.dispatch(new fromRouter.Go({ path: ['/', 'home'] }));
-              }
-              return true;
-            } else {
-              this.store.dispatch(new fromAuthentication.Logout());
-              return false;
-            }
-          } else {
-            if (path === 'auth') {
-              return true;
-            }
-            this.store.dispatch(new fromRouter.Go({ path: ['/', 'auth'] }));
+            this.store.dispatch(new fromRouter.Go({ path: ['home'] }));
+
             return false;
           }
+
+          return true;
         }
-      }).take(1);
+
+        if (tokenExpiresIn) {
+          if (tokenExpiresIn > Date.now()) {
+            if (path === 'auth') {
+              this.store.dispatch(new fromRouter.Go({ path: ['home'] }));
+            }
+            this.store.dispatch(new fromAuthentication.LoadUser());
+
+            return false;
+          }
+
+          this.store.dispatch(new fromAuthentication.Logout('Token expired'));
+
+          return false;
+        }
+
+        if (path === 'auth') {
+
+          return true;
+        }
+        this.store.dispatch(new fromRouter.Go({ path: ['auth'] }));
+
+        return false;
+      })
+    );
   }
 }

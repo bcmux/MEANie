@@ -21,7 +21,9 @@
         { "glob": "svg-sprite-image.svg", "input": "../../../node_modules/material-design-icons/sprites/svg-sprite/", "output": "assets/" },
         { "glob": "svg-sprite-content.svg", "input": "../../../node_modules/material-design-icons/sprites/svg-sprite/", "output": "assets/" },
         { "glob": "svg-sprite-hardware.svg", "input": "../../../node_modules/material-design-icons/sprites/svg-sprite/", "output": "assets/" },
-        { "glob": "*", "input": "../../../libs/core/src/assets/", "output": "assets/" }
+        { "glob": "svg-sprite-social.svg", "input": "../../../node_modules/material-design-icons/sprites/svg-sprite/", "output": "assets/" },
+        { "glob": "*", "input": "../../../libs/core/src/assets/", "output": "assets/" },
+        { "glob": "*", "input": "../../../libs/authentication/src/assets/", "output": "assets/" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -43,7 +45,7 @@
     },
     {
       "name": "environments",
-      "root": "libs/environments/src",
+      "root": "libs/common/environments/src",
       "test": "../../../test.js",
       "appRoot": ""
     },
@@ -54,32 +56,14 @@
       "appRoot": ""
     },
     {
-      "name": "authentication-state",
-      "root": "libs/authentication-state/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
       "name": "core",
       "root": "libs/core/src",
       "test": "../../../test.js",
       "appRoot": ""
     },
     {
-      "name": "core-state",
-      "root": "libs/core-state/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
       "name": "router-state",
-      "root": "libs/router-state/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "sidenav",
-      "root": "libs/sidenav/src",
+      "root": "libs/common/router-state/src",
       "test": "../../../test.js",
       "appRoot": ""
     },
@@ -90,8 +74,8 @@
       "appRoot": ""
     },
     {
-      "name": "animations",
-      "root": "libs/animations/src",
+      "name": "user",
+      "root": "libs/user/src",
       "test": "../../../test.js",
       "appRoot": ""
     }
@@ -107,11 +91,11 @@
       "exclude": "**/node_modules/**"
     },
     {
-      "project": "apps/storytelling/src/tsconfig.app.json",
+      "project": "apps/default/src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },
     {
-      "project": "apps/storytelling/e2e/tsconfig.e2e.json",
+      "project": "apps/default/e2e/tsconfig.e2e.json",
       "exclude": "**/node_modules/**"
     }
   ],
@@ -121,6 +105,9 @@
     }
   },
   "defaults": {
+    "build": {
+      "showCircularDependencies": false
+    },
     "schematics": {
       "collection": "@nrwl/schematics",
       "postGenerate": "npm run format",

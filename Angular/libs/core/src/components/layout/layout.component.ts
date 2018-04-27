@@ -1,60 +1,83 @@
-import {
-  Component,
-  HostListener,
-  HostBinding,
-  ViewChild,
-  ElementRef,
-  AnimationTransitionEvent } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/operators/combineLatest';
-import { startWith } from 'rxjs/operators/startWith';
-import { values, difference, isEmpty } from 'lodash';
-import { fromCore, CoreState, getShowSidenav, getMenuItems } from '@labdat/core-state';
-import { getLoggedIn, getUser } from '@labdat/authentication-state';
+import { intersection, isEmpty, values } from 'lodash';
+import * as fromCore from '../../+state/actions/core-state.actions';
+import { getLogo, getMenuItems, getShowSidenav, getTitle } from '../../+state/selectors/core-state.selectors';
+import { fromAuthentication, getLoggedIn, getUser, User } from '@labdat/authentication';
 import { map } from 'rxjs/operators/map';
-import { routesAnimation } from '@labdat/animations';
-import { selectTaskLoading } from '@labdat/task-state';
+import { routesAnimation } from '../../animations/routes.animation';
+import { fromRouter } from '@labdat/common/router-state';
+import { MenuItem } from '../../models/menu-item.model';
 
 @Component({
-  selector: 'layout-root',
+  selector: 'core-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  animations: [ routesAnimation ]
+  animations: [routesAnimation]
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
   @ViewChild('outlet')
-  public outlet
+  public outlet;
 
+  public logo$ = this._store.select(getLogo);
+  public title$ = this._store.select(getTitle);
   public menuItems$;
-  public isSidenavOpened$ = this.store.select(getShowSidenav);
-  public isLoggedIn$ = this.store.select(getLoggedIn);
+  public isSidenavOpened$ = this._store.select(getShowSidenav);
+  public isLoggedIn$ = this._store.select(getLoggedIn);
+  public currentUser$ = this._store.select(getUser);
+  public isAdmin$ = this.currentUser$.pipe(
+    map((user: User) => (user) ? user.roles.includes('admin') : false)
+  );
 
-  constructor(private store: Store<any>) {}
+  constructor(private _store: Store<any>) { }
 
-  ngOnInit() {
-    const items$ = this.store.select(getMenuItems);
-    const user$ = this.store.select(getUser);
+  ngOnInit(): void {
+    const items$ = this._store.select(getMenuItems);
+    const user$ = this._store.select(getUser);
     this.menuItems$ = items$.pipe(
-      combineLatest(user$),
-      map(([items, user]) =>
-        values(items)
-          .filter(item => isEmpty(item.roles) || (user && !isEmpty(difference(item.roles, user.roles))))
-          .filter(items => !isEmpty(items))
+      combineLatest(
+        user$,
+        (items, user) =>
+          values(items)
+          .filter(item => isEmpty(item.roles) || (user && intersection(item.roles, user.roles).length > 0))
+          .filter(item => !isEmpty(item))
       )
     );
   }
 
-  public openSidenav() {
-    this.store.dispatch(new fromCore.OpenSidenav());
+  public openSidenav(): void {
+    this._store.dispatch(new fromCore.OpenSidenav());
   }
 
-  public closeSidenav() {
-    this.store.dispatch(new fromCore.CloseSidenav());
+  public closeSidenav(): void {
+    this._store.dispatch(new fromCore.CloseSidenav());
+  }
+
+  public editProfile(): void {
+    this._store.dispatch(new fromRouter.Go({
+      path: [{outlets: { profile: 'profile' }}]
+    }));
+  }
+
+  public userManagement(): void {
+    this._store.dispatch(new fromRouter.Go({ path: ['users'] }));
+  }
+
+  public goToAuthenticationPage(): void {
+    this._store.dispatch(new fromRouter.Go({ path: ['auth'] }));
+  }
+
+  public goTo(link: string): void {
+    this._store.dispatch(new fromRouter.Go({ path: [link] }));
+  }
+
+  public logout(): void {
+    this._store.dispatch(new fromAuthentication.Logout());
+  }
+
+  public trackByOrder(item: MenuItem): number {
+    return item.order;
   }
 }

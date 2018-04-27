@@ -1,21 +1,21 @@
-import { Authenticate } from './../../models/user.model';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Authenticate } from '../../models/authenticate.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { first, keys } from 'lodash';
 
 @Component({
-  selector: 'app-login',
+  selector: 'auth-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
-  @Input()
+  @Input('isPending')
   set pending(isPending: boolean) {
     if (isPending) {
-      this.form.disable();
+      this.loginForm.disable();
     } else {
-      this.form.enable();
+      this.loginForm.enable();
     }
   }
 
@@ -23,21 +23,48 @@ export class LoginComponent {
   public errorMessage: string | null;
 
   @Output()
-  public submitted = new EventEmitter<Authenticate>();
+  public loginSubmitted = new EventEmitter<Authenticate>();
+
+  @Output()
+  public emailSubmitted = new EventEmitter<string>();
+
+  public forgotPassword = false;
 
   public hide = true;
-  public form = this.formBuilder.group({
-    email: this.formBuilder.control('', [ Validators.required, Validators.email ]),
-    password: this.formBuilder.control('', [ Validators.required ])
+  public loginForm = this._formBuilder.group({
+    email: this._formBuilder.control('', [Validators.required, Validators.email]),
+    password: this._formBuilder.control('', [Validators.required])
   });
 
-  get visibility() {
+  public forgotControl = this._formBuilder.control('', [
+    Validators.required,
+    Validators.email
+  ]);
+
+  get visibility(): string {
     return this.hide ? 'action:ic_visibility_off_24px' : 'action:ic_visibility_24px';
   }
 
-  constructor(private formBuilder: FormBuilder) { }
+  get emailError(): string {
+    return first(keys(this.loginForm.get('email').errors)) || '';
+  }
 
-  onSubmit() {
-    this.submitted.emit(this.form.value);
+  get forgotError(): string {
+    return first(keys(this.forgotControl.errors)) || '';
+  }
+
+  get passwordError(): string {
+    return first(keys(this.loginForm.get('password').errors)) || '';
+  }
+
+  constructor(private _formBuilder: FormBuilder) {}
+
+  public onLoginSubmit(): void {
+    this.loginSubmitted.emit(this.loginForm.value);
+  }
+
+  public onForgotPasswordSubmit(email: string): void {
+    this.emailSubmitted.emit(email);
+    this.forgotPassword = false;
   }
 }

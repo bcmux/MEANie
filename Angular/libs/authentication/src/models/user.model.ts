@@ -1,11 +1,10 @@
-export interface Authenticate {
-  email: string;
-  password: string;
-}
-
 export interface User {
+  _id?: string;
+  id: string;
   firstName: string;
   lastName: string;
+  username?: string;
   email: string;
-  roles: string[];
+  profileImageURL: string;
+  roles: Array<string>;
 }

@@ -1,4 +1,4 @@
-import { Component, HostListener, HostBinding } from '@angular/core';
+import { Component, HostBinding, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 
@@ -6,32 +6,29 @@ import { MatIconRegistry } from '@angular/material';
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-
 export class AppComponent {
-
   @HostBinding('class.mat-typography')
-  matTypo() {
+  matTypo(): Boolean {
     return true;
   }
 
   @HostListener('dragover', ['$event'])
-  stoprDragover(event) {
+  stoprDragover(event): void {
     event.preventDefault();
   }
 
   @HostListener('drop', ['$event'])
-  stopDrop(event) {
+  stopDrop(event): void {
     event.preventDefault();
   }
 
-  constructor(
-    private mdIconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer,
-  ) {
-    ['file', 'editor', 'action', 'navigation', 'av', 'image', 'content', 'hardware']
-    .forEach(iconSet =>
-      mdIconRegistry.addSvgIconSetInNamespace(iconSet, sanitizer.bypassSecurityTrustResourceUrl(`assets/svg-sprite-${iconSet}.svg`
-    )));
-    mdIconRegistry.addSvgIcon('file-image', sanitizer.bypassSecurityTrustResourceUrl(`assets/file.svg`));
+  constructor(private _mdIconRegistry: MatIconRegistry, private _sanitizer: DomSanitizer) {
+    ['file', 'editor', 'action', 'navigation', 'av', 'image', 'content', 'hardware', 'social'].forEach(iconSet =>
+      this._mdIconRegistry.addSvgIconSetInNamespace(
+        iconSet,
+        this._sanitizer.bypassSecurityTrustResourceUrl(`assets/svg-sprite-${iconSet}.svg`)
+      )
+    );
+    this._mdIconRegistry.addSvgIcon('file-image', this._sanitizer.bypassSecurityTrustResourceUrl('assets/file.svg'));
   }
 }

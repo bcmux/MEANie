@@ -1,59 +1,64 @@
-import { NgModule } from '@angular/core';
-import { AppComponent } from './components/app.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {
+  AuthenticationGuardService,
+  AuthenticationRoutingModule,
+  AuthenticationStateModule,
+  ProfileComponent
+} from '@labdat/authentication';
 import { BrowserModule } from '@angular/platform-browser';
 import { NxModule } from '@nrwl/nx';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material';
-import { SidenavModule } from '@labdat/sidenav';
-import { AuthenticationModule } from '@labdat/authentication';
-import { CoreModule } from '@labdat/core';
+import { coreConfiguration, CoreStateModule, CoreViewModule } from '@labdat/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { CoreStateModule } from '@labdat/core-state';
-import { AuthenticationStateModule } from '@labdat/authentication-state';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppComponent } from './components/app.component';
+import { NgModule } from '@angular/core';
 import { metaReducers } from './+state/app.reducer';
-import { coreConfiguration } from '@labdat/core';
 import { environment } from '../environments/environment';
-import { RouterStateModule } from '@labdat/router-state';
-import { ConnectFormStateModule } from '@labdat/connect-form-state';
-import { TaskStateModule } from '@labdat/task-state';
-import { taskConfiguration } from '@labdat/task';
-import { TaskRoutingModule } from '@labdat/task-routing';
-import { FormlyModule } from '@ngx-formly/core';
+import { RouterStateModule } from '@labdat/common/router-state';
+// import { ConnectFormStateModule } from '@labdat/connect-form-state';
+import { taskConfiguration, TaskRoutingModule, TaskStateModule } from '@labdat/task';
+import { UserDetailDialogComponent, UserRoutingModule, UserStateModule } from '@labdat/user';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     NxModule.forRoot(),
-//    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
-    FormlyModule.forRoot(),
     BrowserModule,
-    RouterModule,
+    RouterModule.forRoot([{
+      path: 'profile',
+      outlet: 'profile',
+      canActivate: [AuthenticationGuardService],
+      component: ProfileComponent
+    }])/*.forRoot([], { initialNavigation: 'enabled' })*/,
     BrowserAnimationsModule,
     MatIconModule,
-
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
+    RouterStateModule.forRoot(),
     RouterModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
-    SidenavModule.forRoot(),
-    AuthenticationModule.forRoot(),
-    CoreModule.forRoot(),
+    AuthenticationRoutingModule.forRoot(),
+    UserRoutingModule.forRoot(),
     TaskRoutingModule.forRoot(),
 
-    RouterStateModule.forRoot(),
+    CoreStateModule.forRoot([coreConfiguration.self, taskConfiguration.core]),
     AuthenticationStateModule.forRoot(),
-    CoreStateModule.forRoot([
-      ...coreConfiguration.self,
-      ...taskConfiguration.core
-    ]),
-    ConnectFormStateModule,
-    TaskStateModule.forRoot()
+    UserStateModule.forRoot(),
+    TaskStateModule.forRoot(),
+
+    CoreViewModule
+//    ConnectFormStateModule,
   ],
   declarations: [AppComponent],
+  entryComponents: [UserDetailDialogComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

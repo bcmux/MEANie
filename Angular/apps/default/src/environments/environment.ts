@@ -5,16 +5,16 @@
 
 export const environment = {
   production: false,
-  backend: {
+  api: {
     protocol: 'http',
     host: 'localhost',
     port: '3000',
     endpoints: {
-      basePath: 'api',
-      signup: 'auth/signup',
-      signin: 'auth/signin',
-      users : 'users',
-      articles: 'articles'
+      basepath: 'api',
+      auth: 'auth',
+      users: 'users',
+      tasks: 'tasks',
+      media: 'media'
     }
   }
 };
