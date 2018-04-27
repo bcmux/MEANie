@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+[mat-card-avatar] {
+  background-size: cover;
+}
+
+[contenteditable=true] {
+  outline: none;
+  text-decoration: underline;
+}
+
+mat-card-subtitle[contenteditable=true], mat-card-title[contenteditable=true] {
+  outline-offset: 2px;
+}
+
+[contenteditable=false] {
+  outline: none;
+}
+
+button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+img {
+  background-size: cover !important;
+}
+
+img.edit {
+  object-fit: none;
+  cursor: pointer;
+}
+
+#dialog-content {
+  padding: 3px;
+}
+
+mat-card {
+  width: 80%;
+}

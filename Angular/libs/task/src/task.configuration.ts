@@ -1,19 +1,21 @@
-import { MenuItem } from '@labdat/data-models';
+import { MenuItem } from '@labdat/core';
 
 export interface TaskConfiguration {
-  core: MenuItem[],
-  self: any
+  core: { sidenav: Array<MenuItem> };
+  self: { roles: Array<string>; };
 }
 
 export const taskConfiguration: TaskConfiguration = {
-  core: [{
-    order: 4,
-    link: '/tasks',
-    name: 'Tasks',
-    icon: 'action:ic_chrome_reader_mode_24px',
-    roles: ['user', 'admin'],
-  }],
+  core: {
+    sidenav: [{
+      order: 2,
+      link: 'tasks',
+      name: 'Tasks',
+      icon: 'action:ic_chrome_reader_mode_24px',
+      roles: ['user', 'admin']
+    }]
+  },
   self: {
-    roles: ['user', 'admin'],
+    roles: ['user', 'admin']
   }
 };

@@ -1,12 +1,14 @@
 {
 	"scripts": {
-		"postinstall": "lerna bootstrap",
+		"back:install": "cd Node/server && npm install",
+		"front:install": "cd Angular && npm install",
+		"postinstall": "run-p front:install back:install",
 		"start": "run-p front back",
 		"prod": "run-p front:prod back:prod",
 		"front": "cd Angular && npm run-script start",
 		"front:prod": "cd Angular && npm run-script build:prod",
-		"back": "cd Riess.js/server && npm run-script start",
-		"back:prod": "cd Riess.js/server && npm run-script prod"
+		"back": "cd Node/server && npm run-script start",
+		"back:prod": "cd Node/server && npm run-script prod"
 	},
 	"devDependencies": {
 		"lerna": "^2.5.1",
