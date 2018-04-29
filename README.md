@@ -15,7 +15,7 @@ Make sure you have installed all of the following prerequisites on your developm
 Straightforward
 ```bash
 ## Clone the repo localy
-$ git clone https://github.com/weareopensource/MEANie.git --recursive && cd MEANie
+$ git clone https://github.com/weareopensource/MEANie.git && cd MEANie
 
 ## Install dependencies
 $ npm i
