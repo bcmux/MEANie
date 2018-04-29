@@ -36,29 +36,26 @@ $ npm i
 ## Define your own project repo and keep it sync with MEANie
 This step is not mandatory. You can directly clone the repository and get a working app. But since you will need to deploy your app soon, hosting your own project on github and configuring it to get the last update from the kick starter is a must. This is done this way:
 ```bash
-## Create a repository from github.com, let say https://github.com/me/myproject.git
+## Fork the repo
 
 ## Clone the repo localy
-$ git clone https://github.com/weareopensource/MEANie.git
-
-## Rename the folder to match you project name
-$ mv MEANie myproject
+$ git clone https://github.com/me/MEANie.git
 
 ## cd into it
-$ cd myproject
+$ cd MEANie
 
-## Change the upstream
-$ git remote add -u origin https://github.com/me/myproject.git
-
-## Keep track of the subtree upstream
-$ git remote add Angular https://github.com/weareopensource/Angular.git
-$ git remote add Node https://github.com/weareopensource/Node.git
+## Keep track of the upstream
+$ git remote add angular https://github.com/weareopensource/Angular.git
+$ git remote add node https://github.com/weareopensource/Node.git
 $ git add .
 $ git commit -m 'first commit'
 $ git push
 
 ## Install dependencies
 $ npm i
+
+## Run it
+$ npm start
 ```
 
 ## Sync with the source
