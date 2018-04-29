@@ -45,8 +45,8 @@ $ git clone https://github.com/me/MEANie.git
 $ cd MEANie
 
 ## Keep track of the upstream
-$ git remote add angular https://github.com/weareopensource/Angular.git
-$ git remote add node https://github.com/weareopensource/Node.git
+$ git remote add Angular https://github.com/weareopensource/Angular.git
+$ git remote add Node https://github.com/weareopensource/Node.git
 $ git add .
 $ git commit -m 'first commit'
 $ git push
@@ -61,8 +61,8 @@ $ npm start
 ## Sync with the source
 Since MEANie is split into two separate projects (Angular and Riess) hosted on two different reposotories, to get the last updates for one or the other part, simply run the commands bellow
 ```bash
-$ git pull -s subtree Angular master
-$ git pull -s subtree Riess.js master
+$ git pull Angular master
+$ git pull Node master
 ```
 
 ## How to contribute
