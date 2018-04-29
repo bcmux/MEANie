@@ -67,7 +67,7 @@ $ git pull Node master
 
 ## How to contribute
 We welcome pull requests from the community!
-See [Angular READ.me](https://github.com/weareopensource/Angular) and [Riess.js READ.me](https://github.com/weareopensource/Riess.js).
+See [Angular READ.me](https://github.com/weareopensource/Angular) and [Node READ.me](https://github.com/weareopensource/Node).
 
 ## License
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE.md)
