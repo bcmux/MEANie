@@ -11,7 +11,6 @@
 		"back:prod": "cd Node/server && npm run-script prod"
 	},
 	"devDependencies": {
-		"lerna": "^2.5.1",
 		"npm-run-all": "^4.1.2"
 	}
 }
