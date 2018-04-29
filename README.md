@@ -52,7 +52,7 @@ $ git remote add -u origin https://github.com/me/myproject.git
 
 ## Keep track of the subtree upstream
 $ git remote add Angular https://github.com/weareopensource/Angular.git
-$ git remote add Riess.js https://github.com/weareopensource/Riess.js.git
+$ git remote add Node https://github.com/weareopensource/Node.git
 $ git add .
 $ git commit -m 'first commit'
 $ git push
