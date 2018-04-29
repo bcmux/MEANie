@@ -1,6 +1,0 @@
-[submodule "Node"]
-	path = Node
-	url = git://github.com/weareopensource/Node.git
-[submodule "Angular"]
-	path = Angular
-	url = git://github.com/weareopensource/Angular.git
